@@ -8,7 +8,7 @@ apt-get install --assume-yes wget unzip supervisor
 WORKDIR /var/www/
 RUN mkdir ghost && \
 wget https://ghost.org/zip/ghost-0.11.0.zip && \
-unzip ghost-*.zip -d ghost && \
+unzip ghost-*.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
     rm -rf /var/lib/apt/lists/*
