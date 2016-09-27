@@ -15,9 +15,9 @@ RUN apt-get -y remove wget unzip && \
     rm -rf /var/lib/apt/lists/*
 
 
-RUN useradd ghost -m -G www-data -s /bin/bash
-RUN chown ghost:www-data ghost
-RUN chown ghost:www-data -R ghost/*
+#RUN useradd ghost -m -G www-data -s /bin/bash
+RUN chown www-data:www-data ghost
+RUN chown www-data:www-data -R ghost/*
 RUN npm install pm2 -g
 
 #USER ghost
