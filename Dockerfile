@@ -17,10 +17,10 @@ RUN apt-get -y remove wget unzip && \
 RUN useradd ghost -m -G www-data -s /bin/bash
 RUN chown ghost:www-data ghost
 RUN chown ghost:www-data -R ghost/*
+RUN npm install pm2 -g
 
 USER ghost
 WORKDIR /var/www/ghost
-RUN npm install pm2 -g
 RUN /bin/bash -c "time (npm install sqlite3)"
 RUN npm install
 
