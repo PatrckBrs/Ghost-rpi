@@ -1,5 +1,6 @@
 FROM patrckbrs/node.js:latest
 
+USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
 apt-get update && \
@@ -19,7 +20,7 @@ RUN chown ghost:www-data ghost
 RUN chown ghost:www-data -R ghost/*
 RUN npm install pm2 -g
 
-USER ghost
+#USER ghost
 WORKDIR /var/www/ghost
 RUN /bin/bash -c "time (npm install sqlite3)"
 RUN npm install
