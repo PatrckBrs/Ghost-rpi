@@ -4,7 +4,7 @@ USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
 apt-get update && \
-apt-get install --assume-yes wget unzip supervisor 
+apt-get install --assume-yes wget unzip
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
@@ -14,13 +14,10 @@ unzip ghost-*.zip -d ghost
 RUN apt-get -y remove wget unzip && \
     rm -rf /var/lib/apt/lists/*
 
-
-#RUN useradd ghost -m -G www-data -s /bin/bash
 RUN chown www-data:www-data ghost
 RUN chown www-data:www-data -R ghost/*
 RUN npm install pm2 -g
 
-#USER ghost
 WORKDIR /var/www/ghost
 RUN /bin/bash -c "time (npm install sqlite3)"
 RUN npm install
