@@ -10,7 +10,7 @@ apt-get install --assume-yes wget unzip
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
-wget https://ghost.org/zip/ghost-0.11.0.zip && \
+wget https://ghost.org/zip/ghost-0.11.2.zip && \
 unzip ghost-*.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
