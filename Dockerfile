@@ -1,3 +1,5 @@
+# Best help -> https://github.com/alexellis/ghost-on-docker
+# Thanks you
 FROM patrckbrs/node.js:latest
 
 USER root
@@ -27,4 +29,10 @@ EXPOSE 2368
 ENV NODE_ENV production
 
 RUN sed -e s/127.0.0.1/0.0.0.0/g ./config.example.js > ./config.js
+RUN sed -i s/my-ghost-blog.com/www.codexatomos.org/g config.js
+
+VOLUME ["/var/www/ghost/content/apps"]
+VOLUME ["/var/www/ghost/content/data"]
+VOLUME ["/var/www/ghost/content/images"]
+
 CMD ["pm2", "start", "index.js", "--name", "Ghost", "--no-daemon"]
