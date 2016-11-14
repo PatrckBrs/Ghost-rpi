@@ -1,12 +1,15 @@
 # Best help -> https://github.com/alexellis/ghost-on-docker
 # Thanks you
-FROM patrckbrs/node.js:latest
+#FROM patrckbrs/node.js:latest
+FROM hypriot/rpi-alpine-scratch
 
 USER root
 # Update sources && install packages
-RUN DEBIAN_FRONTEND=noninteractive ;\
-apt-get update && \
-apt-get install --assume-yes wget unzip
+#RUN DEBIAN_FRONTEND=noninteractive ;\
+#apt-get update && \
+#apt-get install --assume-yes wget unzip
+apk update && \
+apk add wget unzip nodejs
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
