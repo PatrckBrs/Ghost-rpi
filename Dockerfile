@@ -8,7 +8,7 @@ USER root
 #RUN DEBIAN_FRONTEND=noninteractive ;\
 #apt-get update && \
 #apt-get install --assume-yes wget unzip
-apk update && \
+RUN apk update && \
 apk add wget unzip nodejs
 
 WORKDIR /var/www/
