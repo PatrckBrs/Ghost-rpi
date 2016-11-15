@@ -6,5 +6,5 @@ node {
         // currently, we can use "checkout scm".
         stage('Checkout') {
             checkout scm
-            git url: 'https://github.com/PatrckBrs/Ghost-rpi.git'
+            sh 'git https://github.com/PatrckBrs/Ghost-rpi.git' 
         }
