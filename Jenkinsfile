@@ -5,5 +5,6 @@ node {
         // currently, we can use "checkout scm".
         stage('Checkout') {
             checkout scm
+                // TEST 
         } 
 }
