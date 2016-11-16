@@ -7,4 +7,8 @@ node {
             checkout scm
                 // TEST 
         } 
+        dockerNode(image: 'patrckbrs/rpi-jenkins-docker-image-slave', sideContainers: ['']) {
+        // some block
+        }
 }
+
