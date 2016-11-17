@@ -2,7 +2,7 @@
 
 node {
        stage "Preparation du Container"
-       docker.image('patrckbrs/rpi-jenkins-docker-image-slave:latest').inside {
+       dockerNode(image: 'patrckbrs/rpi-jenkins-docker-image-slave:latest', sideContainers: ['']) {
             stage 'Checkout'
             checkout scm
                 // TEST 
