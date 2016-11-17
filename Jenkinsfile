@@ -8,8 +8,8 @@ node {
                 // TEST 
         } 
         stage('Docker') {
-        dockerNode(image: 'patrckbrs/rpi-jenkins-docker-image-slave', sideContainers: ['']) {
-        // some block
+        dockerNode(image: 'patrckbrs/rpi-jenkins-docker-image-slave:latest', sideContainers: ['bash']) {
+        ls -l
         }
         }
 }
