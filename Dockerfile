@@ -10,8 +10,8 @@ apt-get install --assume-yes wget unzip
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
-wget https://ghost.org/zip/ghost-0.11.3.zip && \
-unzip ghost-*.zip -d ghost
+wget https://github.com/TryGhost/Ghost/releases/download/0.11.3/Ghost-0.11.3.zip && \
+unzip Ghost-*.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
     rm -rf /var/lib/apt/lists/*
