@@ -1,6 +1,6 @@
 # Best help -> https://github.com/alexellis/ghost-on-docker
 # Thanks you
-# New version update 0.11.3
+# New version update 0.11.4
 FROM patrckbrs/node.js:latest
 
 USER root
@@ -11,7 +11,7 @@ apt-get install --assume-yes wget unzip
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
-wget https://github.com/TryGhost/Ghost/releases/download/0.11.3/Ghost-0.11.3.zip && \
+wget https://github.com/TryGhost/Ghost/releases/download/0.11.4/Ghost-0.11.4.zip && \
 unzip Ghost-*.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
