@@ -1,5 +1,3 @@
-# Best help -> https://github.com/alexellis/ghost-on-docker
-# Thanks you
 # New version update 0.11.4
 FROM patrckbrs/node.js:latest
 
