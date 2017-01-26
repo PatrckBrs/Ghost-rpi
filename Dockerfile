@@ -1,6 +1,8 @@
 # New version update 0.11.4
 FROM patrckbrs/node.js:latest
 
+LABEL maintainer "patrick@brunias.org"
+
 USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
