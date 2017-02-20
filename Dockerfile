@@ -3,6 +3,8 @@ FROM patrckbrs/node.js:latest
 
 LABEL maintainer "patrick@brunias.org"
 
+ENV GHOST_VERSION=0.11.4
+
 USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
@@ -11,8 +13,8 @@ apt-get install --assume-yes wget unzip
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
-wget https://github.com/TryGhost/Ghost/releases/download/0.11.4/Ghost-0.11.4.zip && \
-unzip Ghost-*.zip -d ghost
+wget https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip && \
+unzip Ghost-${GHOST_VERSION}.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
     rm -rf /var/lib/apt/lists/*
