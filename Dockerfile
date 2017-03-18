@@ -3,7 +3,7 @@ FROM patrckbrs/node.js:latest
 
 LABEL maintainer "patrick@brunias.org"
 
-ENV GHOST_VERSION=0.11.4
+ENV GHOST_VERSION=0.11.7
 
 USER root
 # Update sources && install packages
