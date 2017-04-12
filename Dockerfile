@@ -1,7 +1,7 @@
 # New version update 0.11.4
 FROM patrckbrs/node.js:latest
 
-LABEL maintainer "patrick@brunias.org"
+LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
 
 ENV GHOST_VERSION=0.11.7
 
