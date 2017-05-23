@@ -1,4 +1,6 @@
 # Ghost-rpi
 Blog open source
 
-[![Build Status](https://jenkins.test.codexatomos.org/job/Ghost/badge/icon)](https://jenkins.test.codexatomos.org/job/Ghost/)
+[![Build Status](https://jenkins.codexatomos.org/job/Ghost-Blog/job/Ghost_Master_Branch/badge/icon)](https://jenkins.codexatomos.org/job/Ghost-Blog/job/Ghost_Master_Branch)
+
+
