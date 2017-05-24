@@ -17,6 +17,7 @@ wget https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-
 unzip Ghost-${GHOST_VERSION}.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
+    apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
 RUN chown www-data:www-data ghost
