@@ -11,10 +11,7 @@ node('RASP-004') {
 
     // AnsiColor
     wrap([$class: 'AnsiColorBuildWrapper']) {
-    // Just some echoes to show the ANSI color.
-    stage "\u001B[31mI'm Red\u001B[0m Now not"
-   
-	
+   	
     /* Using this hack right now to grab the appropriate abbreviated SHA1 of
      * our current build's commit. We must do this because right now I cannot
      * refer to `env.GIT_COMMIT` in Pipeline scripts
