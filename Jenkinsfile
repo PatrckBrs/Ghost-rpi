@@ -1,0 +1,15 @@
+node('RASP-004'){
+    stage('Checkout') {
+        git 'https://github.com/PatrckBrs/Ghost-rpi.git', branch: "master"
+    }
+
+    stage('Build') {
+        try {
+            sh 'docker build -t Ghost .'
+            }
+    }
+
+    stage('Clean workspace'){
+        deleteDir()
+    }
+}
