@@ -8,6 +8,9 @@ properties([[$class: 'BuildDiscarderProperty',
 
 node('RASP-004') {
     checkout scm
+	
+    // AnsiColor
+    wrap([$class: 'AnsiColorBuildWrapper']) {
 
     /* Using this hack right now to grab the appropriate abbreviated SHA1 of
      * our current build's commit. We must do this because right now I cannot
@@ -25,4 +28,5 @@ node('RASP-004') {
 	
    stage 'Update Service'
    sh "docker service update swarm_master --image ${imageName}:${imageTag}"
+   }
 }
