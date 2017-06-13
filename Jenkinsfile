@@ -4,7 +4,7 @@ node('RASP-004'){
     }
 
     stage('Build') {
-            def app = docker.build --no-cache "patrckbrs/ghost-rpi:${env.BUILD_NUMBER}"
+            def app = docker.build "patrckbrs/ghost-rpi:${env.BUILD_NUMBER}"
     }
 
     stage('Clean workspace'){
