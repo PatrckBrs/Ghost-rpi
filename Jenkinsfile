@@ -28,7 +28,7 @@ node('RASP-004') {
 	  
     sshagent(['33db902e-b5fc-4b78-bd46-dc6f10ef4f42']) {
     stage 'Update Service'
-    sh "docker service update swarm_master --image ${imageName}:${imageTag}"
+    sh "docker service update ghost --image ${imageName}:${imageTag}"
     }
    }
 }
