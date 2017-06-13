@@ -4,7 +4,7 @@ node('RASP-004'){
     }
 
     stage('Build') {
-        try {
+            {
             sh 'docker build -t Ghost .'
             }
     }
