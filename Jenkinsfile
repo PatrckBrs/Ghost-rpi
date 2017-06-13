@@ -22,4 +22,7 @@ node('RASP-004') {
 	
     stage 'Deploy'
     whale.push()
+	
+   stage 'Update Service'
+   sh "docker service update swarm_master --image ${imageName}:${imageTag}"
 }
