@@ -1,6 +1,6 @@
 node('RASP-004'){
     stage('Checkout') {
-        git 'https://github.com/PatrckBrs/Ghost-rpi.git', branch: "master"
+        git url: 'https://github.com/PatrckBrs/Ghost-rpi.git', branch: "master"
     }
 
     stage('Build') {
