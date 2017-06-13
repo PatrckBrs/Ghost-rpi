@@ -4,7 +4,7 @@ node('RASP-004'){
     }
 
     stage('Build') {
-            def app = docker.build --no-cache "ghost"
+            def app = docker.build ("patrckbrs/ghost-rpi:${env.BUILD_NUMBER}" , '--no-cache --rm .')
     }
 
     stage('Clean workspace'){
