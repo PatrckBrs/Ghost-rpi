@@ -4,7 +4,7 @@ node('RASP-004'){
     }
 
     stage('Build') {
-            def app = docker.build "ghost"
+            def app = docker.build --no-cache "ghost"
     }
 
     stage('Clean workspace'){
