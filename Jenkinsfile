@@ -24,8 +24,12 @@ node('RASP-004') {
     def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
     }
 	    
-    stage ('Deploy') {
-    whale.push()
+    //stage ('Deploy') {
+    //whale.push()
+    //}
+    stage('Prune') {
+    node('RASP-004') {
+        sh "docker image prune -f"
     }
     }
 }
