@@ -27,7 +27,7 @@ node('RASP-004') {
 	    def whale = docker.build "${imageName}:${imageTag}"
     }
     
-    stage("Publish") { 
+    stage('Publish') { 
     // Only publish if this is a merge to master
     //stage ('Deploy') {
     //whale.push()
@@ -37,7 +37,7 @@ node('RASP-004') {
 	    }
     }  
 
-	stage("UpdateService") { 
+	stage('UpdateService') { 
 		if (env.BRANCH_NAME == 'master') {
 			sshagent(['33db902e-b5fc-4b78-bd46-dc6f10ef4f42']) {
 				sh "ssh -o StrictHostKeyChecking=no -l ${swarmUser} ${swarmMaster} docker service update ghost --image ${imageName}:${imageTag}"
