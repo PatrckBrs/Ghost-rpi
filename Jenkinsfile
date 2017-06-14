@@ -1,8 +1,8 @@
 #!groovy
 
 def imageName = 'patrckbrs/ghost-rpi'
-def swarm-master = '192.168.0.181'
-def swarm-user = 'pirate'
+def swarmMaster = '192.168.0.181'
+def swarmUser = 'pirate'
 
 /* Only keep the 10 most recent builds. */
 properties([[$class: 'BuildDiscarderProperty',
@@ -42,7 +42,7 @@ node('RASP-004') {
 	stage("UpdateService") { 
 		if (env.BRANCH_NAME == 'master') {
 			sshagent(['33db902e-b5fc-4b78-bd46-dc6f10ef4f42']) {
-				sh "ssh -o StrictHostKeyChecking=no -l ${swarm-user} ${swarm-master} docker service update ghost --image ${imageName}:${imageTag}"
+				sh "ssh -o StrictHostKeyChecking=no -l ${swarmUser} ${swarmMaster} docker service update ghost --image ${imageName}:${imageTag}"
 			}	
 		}
 	}
