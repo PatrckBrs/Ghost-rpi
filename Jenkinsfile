@@ -23,7 +23,8 @@ node('RASP-004') {
     def imageTag = "build${shortCommit}"
 
     stage ('Build Container') {
-	    def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	   // def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	    def whale = docker.build '${imageName}:${imageTag}'
     }
     
     stage("Publish") { 
