@@ -38,9 +38,7 @@ node('RASP-004') {
     }
 	   
     stage('Prune') {
-	    node('RASP-004') {
 		    sh "docker image prune -f"
-	    }
     }
 
 	stage('UpdateService') { 
