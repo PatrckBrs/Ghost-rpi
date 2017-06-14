@@ -11,41 +11,29 @@ properties([[$class: 'BuildDiscarderProperty',
 node('RASP-004') {
 	checkout scm
 	sh 'echo $BRANCH_NAME'
-   
-
-    // AnsiColor
-    wrap([$class: 'AnsiColorBuildWrapper']) {
-   	
-    /* Using this hack right now to grab the appropriate abbreviated SHA1 of
-     * our current build's commit. We must do this because right now I cannot
-     * refer to `env.GIT_COMMIT` in Pipeline scripts
-     */
-    sh 'git rev-parse HEAD > GIT_COMMIT'
-    shortCommit = readFile('GIT_COMMIT').take(6)
-    def imageTag = "build${shortCommit}"
-
-    stage ('Build Container') {
-	   // def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
-	    def whale = docker.build "${imageName}:${imageTag}"
-    }
-    
-    stage('Publish') { 
-    // Only publish if this is a merge to master
-    //stage ('Deploy') {
-    //whale.push()
-    //}
-	if (env.BRANCH_NAME == 'master') {
-	    whale.push()
-	    }
-    }
-	   
-    stage('Prune') {
-		    sh "docker image prune -f"
-    }
-
 	
-	   
-    
-    
-    }
+	// AnsiColor
+	wrap([$class: 'AnsiColorBuildWrapper']) {
+   
+	sh 'git rev-parse HEAD > GIT_COMMIT'
+    	shortCommit = readFile('GIT_COMMIT').take(6)
+    	def imageTag = "build${shortCommit}"
+
+    	stage 'Build Container'
+		// def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	    	def whale = docker.build "${imageName}:${imageTag}"
+		
+	stage 'Publish'
+    	// Only publish if this is a merge to master
+    	//stage ('Deploy') {
+    	//whale.push()
+    	//}
+		if (env.BRANCH_NAME == 'master') {
+			whale.push()
+		}	
+		
+	stage 'Prune'
+		sh "docker image prune -f"
+	
+	}
 }
