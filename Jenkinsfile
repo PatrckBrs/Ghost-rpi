@@ -21,17 +21,27 @@ node('RASP-004') {
     def imageTag = "build${shortCommit}"
 
     stage ('Build Container') {
-    def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	    def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
     }
-	    
+    
+    stage("Publish") { 
+    // Only publish if this is a merge to master
     //stage ('Deploy') {
     //whale.push()
     //}
+	    if (env.BRANCH_NAME == 'master') {
+		    docker.withRegistry('', 'dockerhub-credentials') {
+			    image = docker.image(whale)
+			    image.push()
+		    }
+	    }
+    }                       
+    
     stage('Prune') {
-    node('RASP-004') {
-        sh "docker image prune -f"
-        }
+	    node('RASP-004') {
+		    sh "docker image prune -f"
+	    }
     }
-	    
+    
     }
 }
