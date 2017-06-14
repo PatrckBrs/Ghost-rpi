@@ -32,10 +32,7 @@ node('RASP-004') {
     //whale.push()
     //}
 	if (env.BRANCH_NAME == 'master') {
-	    docker.withRegistry('', 'dockerhub-credentials') {
-		    image = docker.image(whale)
-		    image.push()
-			}
+	    whale.push()
 	    }
     }  
 
