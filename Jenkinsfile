@@ -23,11 +23,11 @@ node('RASP-004') {
     stage 'Build Container'
     def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
 	
-    stage 'Deploy'
+    stage ('Deploy') {
     whale.push()
+    }
 	  
     sshagent(['33db902e-b5fc-4b78-bd46-dc6f10ef4f42']) {
-    stage 'Update Service'
     sh "docker service update ghost --image ${imageName}:${imageTag}"
     }
    }
