@@ -34,6 +34,13 @@ node('RASP-004') {
 		
 	stage 'Prune'
 		sh "docker image prune -f"
+		
+	stage 'UpdateService'
+		if (env.BRANCH_NAME == 'master') {
+			sshagent(['33db902e-b5fc-4b78-bd46-dc6f10ef4f42']) {
+				sh "ssh -o StrictHostKeyChecking=no -l ${swarmUser} ${swarmMaster} docker service update ghost --image ${imageName}:${imageTag}"
+			}
+		}
 	
 	}
 }
