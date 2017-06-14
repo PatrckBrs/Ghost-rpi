@@ -9,7 +9,9 @@ properties([[$class: 'BuildDiscarderProperty',
                 strategy: [$class: 'LogRotator', numToKeepStr: '10']]])
 
 node('RASP-004') {
-    checkout scm
+	checkout scm
+	sh 'echo $BRANCH_NAME'
+   
 
     // AnsiColor
     wrap([$class: 'AnsiColorBuildWrapper']) {
