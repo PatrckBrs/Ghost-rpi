@@ -20,8 +20,9 @@ node('RASP-004') {
     shortCommit = readFile('GIT_COMMIT').take(6)
     def imageTag = "build${shortCommit}"
 
-    stage 'Build Container'
+    stage ('Build Container') {
     def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+    }
 	
     stage ('Deploy') {
     whale.push()
