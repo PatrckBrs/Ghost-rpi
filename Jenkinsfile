@@ -35,7 +35,13 @@ node('RASP-004') {
 	if (env.BRANCH_NAME == 'master') {
 	    whale.push()
 	    }
-    }  
+    }
+	   
+    stage('Prune') {
+	    node('RASP-004') {
+		    sh "docker image prune -f"
+	    }
+    }
 
 	stage('UpdateService') { 
 		if (env.BRANCH_NAME == 'master') {
@@ -45,11 +51,7 @@ node('RASP-004') {
 		}
 	}
 	   
-    stage('Prune') {
-	    node('RASP-004') {
-		    sh "docker image prune -f"
-	    }
-    }
+    
     
     }
 }
