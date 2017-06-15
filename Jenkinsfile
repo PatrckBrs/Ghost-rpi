@@ -21,9 +21,14 @@ node('RASP-004') {
     def imageTag = "build${shortCommit}"
 
     stage ('Build Container') {
-	    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	    if (env.BRANCH_NAME == 'master') {
+		    def ghost = docker.build "${imageName}:${imageTag}"
+		    }
+	    if (env.BRANCH_NAME == 'devel') {
+		    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+		    }    
     }
-    
+	    
     stage("Publish") { 
 	    if (env.BRANCH_NAME == 'master') {
 		    docker.withRegistry('', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
