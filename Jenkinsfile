@@ -22,18 +22,17 @@ node('RASP-004') {
 
     stage ('Build Container') {
 	    if (env.BRANCH_NAME == 'master') {
-		    def ghost = docker.build "${imageName}:${imageTag}"
+		    def image = docker.build "${imageName}:${imageTag}"
 		    }
 	    if (env.BRANCH_NAME == 'devel') {
-		    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+		    def image = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
 		    }    
     }
 	    
     stage('Publish') { 
 	    if (env.BRANCH_NAME == 'master') {
 		    docker.withRegistry('', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
-			    image.push("${ghost}")
-			    image.push("latest")
+			    image.push()
 		    }
 	    }
     }                       
