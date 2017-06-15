@@ -21,18 +21,14 @@ node('RASP-004') {
     def imageTag = "build${shortCommit}"
 
     stage ('Build Container') {
-	    def whale = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+	    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
     }
     
     stage("Publish") { 
-    // Only publish if this is a merge to master
-    //stage ('Deploy') {
-    //whale.push()
-    //}
 	    if (env.BRANCH_NAME == 'devel') {
 		    docker.withRegistry('', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
-			    image = docker.image(whale)
-			    image.push()
+			    ghost.push()
+			    ghost.push("latest")
 		    }
 	    }
     }                       
