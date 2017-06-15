@@ -31,7 +31,7 @@ node('RASP-004') {
 	    
     stage('Publish') { 
 	    if (env.BRANCH_NAME == 'master') {
-		    docker.withRegistry('', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
+		    docker.withRegistry('https://registry.hub.docker.com', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
 			    image.push()
 		    }
 	    }
