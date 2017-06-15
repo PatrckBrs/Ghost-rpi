@@ -32,7 +32,7 @@ node('RASP-004') {
     stage('Publish') { 
 	    if (env.BRANCH_NAME == 'master') {
 		    withDockerRegistry([credentialsId: 'a5c2ed42-3bac-4c07-a024-e157f89c5600', url: 'https://registry.hub.docker.com']) {
-			    image.push()
+			    push()
 		    }
 	    }
     }                       
