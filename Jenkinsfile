@@ -23,10 +23,10 @@ node('RASP-004') {
 
     stage ('Build Container') {
 	    if (env.BRANCH_NAME == 'master') {
-		    def ghost = docker.build "${imageName}:${imageTag}"
+		    ghost = docker.build "${imageName}:${imageTag}"
 		    }
 	    if (env.BRANCH_NAME == 'devel') {
-		    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+		    ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
 		    }    
     }
 	    
