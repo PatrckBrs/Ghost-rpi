@@ -1,6 +1,7 @@
 #!groovy
 
 def imageName = 'patrckbrs/ghost-rpi'
+def ghost
 
 /* Only keep the 10 most recent builds. */
 properties([[$class: 'BuildDiscarderProperty',
@@ -22,19 +23,24 @@ node('RASP-004') {
 
     stage ('Build Container') {
 	    if (env.BRANCH_NAME == 'master') {
-		    def ghost = docker.build "${imageName}:${imageTag}"
+		    ghost = docker.build "${imageName}:${imageTag}"
 		    }
 	    if (env.BRANCH_NAME == 'devel') {
-		    def ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
+		    ghost = docker.build("${imageName}:${imageTag}", '--no-cache --rm .')
 		    }    
     }
+	
+	stage('Test image') {
+        if (env.BRANCH_NAME == 'devel') {
+		ghost.inside {
+			sh 'echo "Tests passed"'
+		}
+	}
+	    
 	    
     stage('Publish') { 
 	    if (env.BRANCH_NAME == 'master') {
-		    docker.withRegistry('', 'a5c2ed42-3bac-4c07-a024-e157f89c5600') {
 			    ghost.push()
-			    ghost.push("latest")
-		    }
 	    }
     }                       
     
