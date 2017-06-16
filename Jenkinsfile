@@ -32,11 +32,12 @@ node('RASP-004') {
 	
 	stage('Test image') {
         if (env.BRANCH_NAME == 'devel') {
-		ghost.inside {
-			sh 'echo "Tests passed"'
+			ghost.inside {
+				sh 'echo "Tests passed"'
+			}
 		}
+	 
 	}
-	    
 	    
     stage('Publish') { 
 	    if (env.BRANCH_NAME == 'master') {
