@@ -4,12 +4,15 @@ FROM patrckbrs/node.js:latest
 LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
 
 ENV GHOST_VERSION=0.11.9
+ENV TZ=Europe/Paris
 
 USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
 apt-get update && \
 apt-get install --assume-yes unzip
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /var/www/
 RUN mkdir ghost && \
