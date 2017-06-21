@@ -12,8 +12,6 @@ RUN DEBIAN_FRONTEND=noninteractive ;\
 apt-get update && \
 apt-get install --assume-yes unzip
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 WORKDIR /var/www/
 RUN mkdir ghost && \
 wget https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip && \
@@ -23,8 +21,10 @@ RUN apt-get -y remove wget unzip && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-RUN chown www-data:www-data ghost
-RUN chown www-data:www-data -R ghost/*
+RUN chown www-data:www-data ghost && \
+    chown www-data:www-data -R ghost/* && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    
 RUN npm install pm2 -g
 
 WORKDIR /var/www/ghost
@@ -35,8 +35,8 @@ EXPOSE 2368
 
 ENV NODE_ENV production
 
-RUN sed -e s/127.0.0.1/0.0.0.0/g ./config.example.js > ./config.js
-RUN sed -i s/my-ghost-blog.com/www.codexatomos.org/g config.js
+RUN sed -e s/127.0.0.1/0.0.0.0/g ./config.example.js > ./config.js && \
+    sed -i s/my-ghost-blog.com/www.codexatomos.org/g config.js
 
 VOLUME ["/var/www/ghost/content/apps"]
 VOLUME ["/var/www/ghost/content/data"]
