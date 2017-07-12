@@ -1,4 +1,4 @@
-# New version update 0.11.4
+# New version update 0.11.10
 FROM patrckbrs/node.js:latest
 
 LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
