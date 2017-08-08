@@ -34,6 +34,6 @@ VOLUME ["/var/www/ghost/content/data"]
 VOLUME ["/var/www/ghost/content/images"]
 
 ENV NODE_ENV production
-RUN sed -ie s/127.0.0.1/0.0.0.0/g config.development.json
+RUN sed -ie s/127.0.0.1/0.0.0.0/g config.production.json
 
-CMD ["ghost", "run", "--development", "--ip", "0.0.0.0"]
+CMD ["ghost", "run", "--production", "--ip", "0.0.0.0"]
