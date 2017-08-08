@@ -3,43 +3,37 @@ FROM patrckbrs/node.js:latest
 
 LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
 
-ENV GHOST_VERSION=0.11.10
-ENV TZ=Europe/Paris
+ENV GHOST_VERSION=1.5.0
+ENV NPM_CONFIG_LOGLEVEL warn
 
 USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
-apt-get update && \
-apt-get install --assume-yes unzip
+apt-get update 
 
 WORKDIR /var/www/
-RUN mkdir ghost && \
-wget https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip && \
-unzip Ghost-${GHOST_VERSION}.zip -d ghost
+RUN npm install -g ghost-cli
 
-RUN apt-get -y remove wget unzip && \
-    apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
+RUN useradd ghost
+RUN addgroup ghost www-data
+RUN chown ghost:www-data .
 
-RUN chown www-data:www-data ghost && \
-    chown www-data:www-data -R ghost/* && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-    
-RUN npm install pm2 -g
+RUN ghost install local --no-start
+
+USER ghost
 
 WORKDIR /var/www/ghost
-RUN /bin/bash -c "time (npm install sqlite3)"
-RUN npm install
+
+RUN ghost install local --no-start
 
 EXPOSE 2368
-
-ENV NODE_ENV production
-
-RUN sed -e s/127.0.0.1/0.0.0.0/g ./config.example.js > ./config.js && \
-    sed -i s/my-ghost-blog.com/www.codexatomos.org/g config.js
+EXPOSE 2369
 
 VOLUME ["/var/www/ghost/content/apps"]
 VOLUME ["/var/www/ghost/content/data"]
 VOLUME ["/var/www/ghost/content/images"]
 
-CMD ["pm2", "start", "index.js", "--name", "Ghost", "--no-daemon"]
+ENV NODE_ENV production
+RUN sed -ie s/127.0.0.1/0.0.0.0/g config.development.json
+
+CMD ["ghost", "run", "--development", "--ip", "0.0.0.0"]
