@@ -1,9 +1,9 @@
-# New version update 0.11.10
+# New version update 1.5.0
 FROM patrckbrs/node.js:latest
 
 LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
 
-ENV GHOST_VERSION=0.11.10
+ENV GHOST_VERSION=1.5.0
 
 USER root
 # Update sources && install packages
