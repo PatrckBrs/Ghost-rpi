@@ -1,15 +1,14 @@
-# New version update 1.5.0
+# New version update 0.11.11
 FROM patrckbrs/node.js:latest
 
-LABEL maintainer "Patrick Brunias <patrick@brunias.org>"
+LABEL maintainer "patrick@brunias.org"
 
-ENV GHOST_VERSION=1.5.0
+ENV GHOST_VERSION=0.11.11
 
 USER root
 # Update sources && install packages
 RUN DEBIAN_FRONTEND=noninteractive ;\
 apt-get update && \
-apt-get upgrade -y && \
 apt-get install --assume-yes unzip
 
 WORKDIR /var/www/
@@ -18,7 +17,6 @@ wget https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-
 unzip Ghost-${GHOST_VERSION}.zip -d ghost
 
 RUN apt-get -y remove wget unzip && \
-    apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
 RUN chown www-data:www-data ghost
